@@ -21,3 +21,24 @@ Data Packet Specification:
 		- Data format (binary)
 			- Command (1 byte)
 			- Authentication Token Ki which has to be added/removed from a particular sensor (16)
+			
+			
+3.  Set of commands to be implemented:
+* Ping Gateway/Sensor
+   * The backend wishes to see if the gateway or a specified sensor is alive,
+     it expects some form of a PONG response from it.
+ * Restart Gateway/Sensor
+   * The backend wishes to restart the gateway or a specified sensor. In this
+     one case the device does not need to send back an ACK as the restart will
+     be verified out of band.
+ * Add New Ki Token to Sensor
+   * The backend wishes to add a new authentication token for a Ki to a
+     specified sensor, this token is a 128 bit binary value, see
+     `includes/sensor/ki_store.h` for functions related to adding this.
+ * Remove Ki Token from Sensor
+   * The backend wishes to remove an authentication token for a Ki from a
+     specified sensor, this token is a 128 bit binary value, see
+     `includes/sensor/ki_store.h` for functions related to removing this.
+ * Open Door Connected to Sensor
+   * The backend wishes to unlock the door connected to a specified sensor, see
+     `includes/sensor/door.h` for functions related to this.
