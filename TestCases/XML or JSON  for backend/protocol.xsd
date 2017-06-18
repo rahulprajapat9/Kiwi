@@ -1,0 +1,37 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="communication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="com_to_gw">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="gateway">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="dev_id"/>
+                    <xs:element type="xs:byte" name="cmd"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="com_to_sensor">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sensor" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="dev_id"/>
+                    <xs:element type="xs:byte" name="cmd"/>
+                    <xs:element type="xs:byte" name="token_id"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
