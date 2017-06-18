@@ -1,6 +1,16 @@
-# Kiwi
+# Kiwi readme
 
-Data Packet Specification:
+## Pointers to browse this repo:
+- src/sensor.c and src/gateway.c contains the handle communication function for sensor nodes and gateway respectively.
+- includes folder contains various header files provided by Kiwi
+- protocol.md describes the custom internet protocol implemented by me in this project
+- TestCases includes various unit testcases, joint testcase with backend, end-to-end test cases scenarios
+	- unit_testcase_sensor.c for sensor.c: faking incoming data from gateway
+	- unit_testcase_gateway.c for gatway.c: faking incoming data from backend
+	- joint_test_case : XML or JSON for backend compatibility
+
+
+## Data Packet Specification:
 
 1. Backend to Gateway Data Flow
 	- Size
