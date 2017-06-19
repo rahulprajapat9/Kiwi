@@ -64,8 +64,8 @@ void handle_communication(void)
   
       /************data from modem (i.e. backend)************/
         //data_in_fromBackend_flag variable returns true (i.e. 1) when modem_dequeue_incoming(..,..) return true (i.e. 1) and GW performs the task given by backend.
-    uint8_t** backend_recv_data;
-    size_t* len_backend_recv_data;
+    uint8_t const **backend_recv_data;
+    size_t* len_backend_recv_data = NULL;
     
     if(modem_dequeue_incoming(backend_recv_data, len_backend_recv_data)==1){
       data_in_fromBackend_flag = 1;
@@ -85,7 +85,9 @@ void handle_communication(void)
       
       if(payload_deviceID.bytes == GW_own_dev_id.bytes){
         //read the command instructed by backend (which is placed in 17th byte of the payload)
-        uint8_t cmd = &(&backend_recv_data)[16];
+        //uint8_t cmd = &(&backend_recv_data)[16];
+	uint8_t cmd=1;
+
         switch (cmd)
         {
           case 1: 
@@ -122,13 +124,13 @@ void handle_communication(void)
     
     if(data_in_fromSensor_flag==1){
         //form a payload with initial 16 bytes as sensor's dev_id and data (varibale), after that send it to the backend.
-      size_t len_sensor_recv_data = strlen(sensor_recv_data);
+      uint8_t len_sensor_recv_data = strlen((char *)sensor_recv_data);
       uint8_t sensor_data_to_backend[MODEM_MAX_PAYLOAD_LENGTH] = {0};
       memcpy(&sensor_data_to_backend[0], &(*sensor_device_id).bytes[0], 16* sizeof(uint8_t));
       memcpy(&sensor_data_to_backend[16], &sensor_recv_data[0], len_sensor_recv_data* sizeof(size_t));
       
       //once payload formation is done, I relay this data to modem.
-      size_t len_sensor_data_to_backend = strlen(sensor_data_to_backend);
+      size_t len_sensor_data_to_backend = strlen((char *)sensor_data_to_backend);
       modem_enqueue_outgoing(sensor_data_to_backend,len_sensor_data_to_backend);  
       
       data_in_fromSensor_flag = 0;  //setting flag back to 0
