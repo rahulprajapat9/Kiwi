@@ -1,9 +1,9 @@
-# Kiwi readme
+# readme
 
 ## Pointers to browse this repo:
 - src/sensor.c and src/gateway.c contains the handle communication function for sensor nodes and gateway respectively.
 
-- includes folder contains various header files provided by Kiwi
+- includes folder contains various header files
 
 - protocol.md describes the custom internet protocol implemented by me in this project
 
